@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mahesh Manchepally | Angular Developer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F0F2F5;
+      --surface: #FFFFFF;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --accent: #0066FF;
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --border: rgba(0, 0, 0, 0.08);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --tag-bg: #E2E8F0;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0F172A;
+      --surface: #1E293B;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --nav-bg: rgba(15, 23, 42, 0.8);
+      --border: rgba(255, 255, 255, 0.1);
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --tag-bg: #334155;
+    }
+
+    * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      margin: 0; font-family: 'Inter', sans-serif;
+      background-color: var(--bg); color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--nav-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      max-width: 1100px; margin: 0 auto; padding: 0.7rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
+    .brand-details { display: flex; flex-direction: column; }
+    .brand-name { font-weight: 700; color: var(--text-main); font-size: 1rem; }
+    .brand-sub { font-size: 0.75rem; color: var(--text-muted); }
+
+    .nav-links { display: flex; gap: 0.5rem; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-main); font-size: 0.85rem; font-weight: 500;
+      padding: 0.5rem 0.8rem; border-radius: 8px;
+    }
+    .nav-links a:hover { background: rgba(0, 102, 255, 0.1); color: var(--accent); }
+
+    .theme-toggle {
+      background: none; border: 1px solid var(--border); cursor: pointer;
+      padding: 8px; border-radius: 10px; display: flex; align-items: center; margin-left: 10px;
+    }
+    .theme-toggle svg { width: 18px; height: 18px; fill: var(--text-main); }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 80px 0; }
+
+    .hero { padding: 80px 0 60px; }
+    .hero-inner { 
+      display: grid; grid-template-columns: 300px 1fr; gap: 4rem; align-items: center; 
+    }
+    .profile-card {
+      background: var(--surface); padding: 2.5rem 1.5rem; border-radius: 24px;
+      box-shadow: var(--card-shadow); text-align: center; border: 1px solid var(--border);
+    }
+    .profile-img {
+      width: 140px; height: 140px; border-radius: 50%; 
+      object-fit: cover; border: 4px solid var(--bg); margin-bottom: 1.5rem;
+    }
+    .hero-content h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
+    .hero-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+    .section-title { 
+      font-size: 1.8rem; font-weight: 800; margin-bottom: 2.5rem; 
+      display: flex; align-items: center; gap: 15px; 
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .card {
+      background: var(--surface); border-radius: 20px; padding: 2.5rem;
+      border: 1px solid var(--border); box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+    }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .tag { 
+      background: var(--tag-bg); padding: 6px 14px; border-radius: 8px; 
+      font-size: 0.85rem; font-weight: 500; 
+    }
+
+    .timeline-item { 
+      border-left: 2px solid var(--accent); padding-left: 2rem; position: relative; margin-bottom: 3rem; 
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -7px; top: 0;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+    }
+    .timeline-date { font-weight: 700; color: var(--accent); font-size: 0.85rem; margin-bottom: 5px; }
+
+    .connect-section { text-align: center; }
+    .connect-card { max-width: 1000px; margin: 0 auto 4rem; }
+    .quote { font-style: italic; font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--text-main); font-weight: 500; }
+    .connect-text { color: var(--text-muted); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    
+    .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .btn-icon {
+      display: flex; align-items: center; gap: 10px; padding: 12px 24px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; text-decoration: none; color: var(--text-main);
+      font-weight: 600; font-size: 0.95rem; transition: 0.3s;
+    }
+    .btn-icon:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.1); color: var(--accent); }
+    .btn-icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+    footer { background: #1E293B; color: #94A3B8; padding: 50px 0; text-align: center; }
+    .footer-links { margin-top: 15px; }
+    .footer-links a { color: #F8FAFC; text-decoration: none; margin: 0 10px; font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .profile-card { margin: 0 auto; max-width: 300px; }
+      .nav-links { display: none; }
+      .hero-content h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <img src="profile.jpg" class="nav-avatar" alt="Mahesh">
+        <div class="brand-details">
+          <span class="brand-name">Mahesh Manchepally</span>
+          <span class="brand-sub">Angular • Java • Frontend</span>
+        </div>
+      </a>
+      
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark Mode">
+          <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zM5.99 18.01l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.38-.39.38-1.03 0-1.41z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-inner">
+      <div class="profile-card">
+        <img src="profile.jpg" alt="Mahesh Manchepally" class="profile-img">
+        <h2 style="margin:0">Mahesh M.</h2>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Angular Developer</p>
+        <div style="margin-top: 15px; font-size: 0.8rem; color: var(--accent); font-weight: 700;">HYDERABAD, INDIA</div>
+      </div>
+
+      <div class="hero-content">
+        <h1>Frontend Developer specializing in Angular Systems.</h1>
+        <p>Experienced Software Engineer with 2.6 years of expertise in building high-performance web applications, reusable UI components, and scalable frontend architectures.</p>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Passionate about clean code, UX integration, and modernizing legacy web systems.</p>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="container">
+    <h2 class="section-title">Summary</h2>
+    <div class="card">
+      <p style="margin:0">I am a results-oriented Frontend Developer with 2.6 years of experience in the IT industry. I have a proven track record of developing dynamic and responsive web applications using <strong>Angular</strong> best practices. Currently, I am expanding my technical horizon by learning <strong>Core Java</strong> and <strong>Spring Boot</strong> to transition into Full-Stack development.</p>
+    </div>
+  </section>
+
+  <section id="skills" class="container">
+    <h2 class="section-title">Technical Expertise</h2>
+    <div class="skills-grid">
+      <div class="card">
+        <h3 style="margin-top:0">Frontend</h3>
+        <div class="skill-tags">
+          <span class="tag">Angular 12-18</span><span class="tag">TypeScript</span>
+          <span class="tag">JavaScript (ES6+)</span><span class="tag">RxJS</span>
+          <span class="tag">HTML5/CSS3</span><span class="tag">SCSS</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Frameworks & Tools</h3>
+        <div class="skill-tags">
+          <span class="tag">Angular Material</span><span class="tag">Bootstrap</span>
+          <span class="tag">Tailwind CSS</span><span class="tag">Figma</span>
+          <span class="tag">Git/GitHub</span><span class="tag">RESTful APIs</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Full Stack & Agile</h3>
+        <div class="skill-tags">
+          <span class="tag">Core Java</span><span class="tag">Spring Boot</span>
+          <span class="tag">WebSockets</span><span class="tag">SSR</span>
+          <span class="tag">Agile/Scrum</span><span class="tag">Lean</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="container">
+    <h2 class="section-title">Experience & Projects</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">DEC 2022 — MAY 2025</div>
+        <h3>Software Engineer</h3>
+        <p style="font-weight:600; margin: 5px 0;">Aumnics IT Solutions Pvt Ltd</p>
+        <ul style="color:var(--text-muted); padding-left: 1rem;">
+          <li><strong>UI Design System:</strong> Designed and maintained a reusable UI library, ensuring design consistency patterns across multiple client projects.</li>
+          <li><strong>SEO & Performance:</strong> Developed the AMY.PRO website using Angular SSR, significantly improving search visibility and organic traffic.</li>
+          <li><strong>Real-time Collaboration:</strong> Built a Workflow Management System with <strong>WebSocket</strong> integration, increasing internal team productivity by 40%.</li>
+          <li><strong>API Integration:</strong> Seamlessly integrated Angular frontends with Spring Boot backends, achieving a 20% increase in user satisfaction.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="container connect-section">
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="card connect-card">
+      <p class="quote">"Technology is nothing. What's important is that you have a faith in people, that they're basically good and smart, and if you give them tools, they'll do wonderful things with them."</p>
+      <p class="connect-text">
+        Whether you want to discuss Angular architecture, collaborative task systems, or just share insights on the latest tech trends—I'm just a click away.
+      </p>
+      <div class="btn-group">
+        <a href="mailto:maheshmanchepally@gmail.com" class="btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Email Me
+        </a>
+        <a href="https://www.linkedin.com/in/mahesh-manchepally-43028721a" target="_blank" class="btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/mahesh_manchepally" target="_blank" class="btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Mahesh Manchepally • Built with HTML & CSS</p>
+      <div class="footer-links"><a href="#">View Source</a> • <a href="mailto:maheshmanchepally@gmail.com">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const themeBtn = document.getElementById('theme-btn');
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    });
+    if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>
